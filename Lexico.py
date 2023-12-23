@@ -63,7 +63,7 @@ def t_error(t):
 lexer = lex.lex()
 
 # Lee el código desde el archivo
-archivo_codigo = 'codigo6.txt'
+archivo_codigo = 'codigo.txt'
 with open(archivo_codigo, 'r') as file:
     codigo = file.read()
 

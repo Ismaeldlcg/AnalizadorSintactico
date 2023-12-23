@@ -146,7 +146,7 @@ def p_error(p):
 
 parser = yacc.yacc()
 
-archivo_codigo = 'codigo6.txt'
+archivo_codigo = 'codigo.txt'
 def cargar_codigo_desde_archivo(nombre_archivo):
     with open(nombre_archivo, 'r') as archivo:
         return archivo.read()

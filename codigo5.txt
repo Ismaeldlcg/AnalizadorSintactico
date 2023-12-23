@@ -1,0 +1,10 @@
+{
+  bool flag;
+  flag = true;
+  do {
+    if (flag) {
+      break;
+    } else {
+      flag = false;
+  } while (flag);
+}

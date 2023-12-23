@@ -1,0 +1,2047 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    COMA
+
+Grammar
+
+Rule 0     S' -> programa
+Rule 1     programa -> bloque
+Rule 2     bloque -> LLLAVE decls instrs RLLAVE
+Rule 3     decls -> decls decl
+Rule 4     decls -> epsilon
+Rule 5     epsilon -> <empty>
+Rule 6     decl -> tipo ID PUNTOYCOMA
+Rule 7     tipo -> tipo LCORCHETE NUMERO RCORCHETE
+Rule 8     tipo -> basico
+Rule 9     basico -> INT
+Rule 10    basico -> FLOAT
+Rule 11    instrs -> instrs instr
+Rule 12    instrs -> epsilon
+Rule 13    instr -> loc IGUAL bool PUNTOYCOMA
+Rule 14    instr -> IF LPAREN bool RPAREN instr
+Rule 15    instr -> IF LPAREN bool RPAREN instr ELSE instr
+Rule 16    instr -> WHILE LPAREN bool RPAREN instr
+Rule 17    instr -> DO instr WHILE LPAREN bool RPAREN PUNTOYCOMA
+Rule 18    instr -> BREAK PUNTOYCOMA
+Rule 19    instr -> bloque
+Rule 20    loc -> loc LCORCHETE bool RCORCHETE
+Rule 21    loc -> ID
+Rule 22    bool -> bool OR comb
+Rule 23    bool -> comb
+Rule 24    comb -> comb AND igualdad
+Rule 25    comb -> igualdad
+Rule 26    igualdad -> igualdad IGUALES rel
+Rule 27    igualdad -> igualdad NE rel
+Rule 28    igualdad -> rel
+Rule 29    rel -> expr LT expr
+Rule 30    rel -> expr LE expr
+Rule 31    rel -> expr GE expr
+Rule 32    rel -> expr GT expr
+Rule 33    rel -> expr
+Rule 34    expr -> expr MAS term
+Rule 35    expr -> expr MENOS term
+Rule 36    expr -> term
+Rule 37    term -> term MULTIPLICACION unario
+Rule 38    term -> term DIVISION unario
+Rule 39    term -> unario
+Rule 40    unario -> NOT unario
+Rule 41    unario -> MENOS unario
+Rule 42    unario -> factor
+Rule 43    factor -> LPAREN bool RPAREN
+Rule 44    factor -> loc
+Rule 45    factor -> NUMERO
+Rule 46    factor -> REAL
+Rule 47    factor -> TRUE
+Rule 48    factor -> FALSE
+
+Terminals, with rules where they appear
+
+AND                  : 24
+BREAK                : 18
+COMA                 : 
+DIVISION             : 38
+DO                   : 17
+ELSE                 : 15
+FALSE                : 48
+FLOAT                : 10
+GE                   : 31
+GT                   : 32
+ID                   : 6 21
+IF                   : 14 15
+IGUAL                : 13
+IGUALES              : 26
+INT                  : 9
+LCORCHETE            : 7 20
+LE                   : 30
+LLLAVE               : 2
+LPAREN               : 14 15 16 17 43
+LT                   : 29
+MAS                  : 34
+MENOS                : 35 41
+MULTIPLICACION       : 37
+NE                   : 27
+NOT                  : 40
+NUMERO               : 7 45
+OR                   : 22
+PUNTOYCOMA           : 6 13 17 18
+RCORCHETE            : 7 20
+REAL                 : 46
+RLLAVE               : 2
+RPAREN               : 14 15 16 17 43
+TRUE                 : 47
+WHILE                : 16 17
+error                : 
+
+Nonterminals, with rules where they appear
+
+basico               : 8
+bloque               : 1 19
+bool                 : 13 14 15 16 17 20 22 43
+comb                 : 22 23 24
+decl                 : 3
+decls                : 2 3
+epsilon              : 4 12
+expr                 : 29 29 30 30 31 31 32 32 33 34 35
+factor               : 42
+igualdad             : 24 25 26 27
+instr                : 11 14 15 15 16 17
+instrs               : 2 11
+loc                  : 13 20 44
+programa             : 0
+rel                  : 26 27 28
+term                 : 34 35 36 37 38
+tipo                 : 6 7
+unario               : 37 38 39 40 41
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . programa
+    (1) programa -> . bloque
+    (2) bloque -> . LLLAVE decls instrs RLLAVE
+
+    LLLAVE          shift and go to state 3
+
+    programa                       shift and go to state 1
+    bloque                         shift and go to state 2
+
+state 1
+
+    (0) S' -> programa .
+
+
+
+state 2
+
+    (1) programa -> bloque .
+
+    $end            reduce using rule 1 (programa -> bloque .)
+
+
+state 3
+
+    (2) bloque -> LLLAVE . decls instrs RLLAVE
+    (3) decls -> . decls decl
+    (4) decls -> . epsilon
+    (5) epsilon -> .
+
+    INT             reduce using rule 5 (epsilon -> .)
+    FLOAT           reduce using rule 5 (epsilon -> .)
+    RLLAVE          reduce using rule 5 (epsilon -> .)
+    IF              reduce using rule 5 (epsilon -> .)
+    WHILE           reduce using rule 5 (epsilon -> .)
+    DO              reduce using rule 5 (epsilon -> .)
+    BREAK           reduce using rule 5 (epsilon -> .)
+    ID              reduce using rule 5 (epsilon -> .)
+    LLLAVE          reduce using rule 5 (epsilon -> .)
+
+    decls                          shift and go to state 4
+    epsilon                        shift and go to state 5
+
+state 4
+
+    (2) bloque -> LLLAVE decls . instrs RLLAVE
+    (3) decls -> decls . decl
+    (11) instrs -> . instrs instr
+    (12) instrs -> . epsilon
+    (6) decl -> . tipo ID PUNTOYCOMA
+    (5) epsilon -> .
+    (7) tipo -> . tipo LCORCHETE NUMERO RCORCHETE
+    (8) tipo -> . basico
+    (9) basico -> . INT
+    (10) basico -> . FLOAT
+
+    RLLAVE          reduce using rule 5 (epsilon -> .)
+    IF              reduce using rule 5 (epsilon -> .)
+    WHILE           reduce using rule 5 (epsilon -> .)
+    DO              reduce using rule 5 (epsilon -> .)
+    BREAK           reduce using rule 5 (epsilon -> .)
+    ID              reduce using rule 5 (epsilon -> .)
+    LLLAVE          reduce using rule 5 (epsilon -> .)
+    INT             shift and go to state 11
+    FLOAT           shift and go to state 12
+
+    instrs                         shift and go to state 6
+    decl                           shift and go to state 7
+    epsilon                        shift and go to state 8
+    tipo                           shift and go to state 9
+    basico                         shift and go to state 10
+
+state 5
+
+    (4) decls -> epsilon .
+
+    INT             reduce using rule 4 (decls -> epsilon .)
+    FLOAT           reduce using rule 4 (decls -> epsilon .)
+    RLLAVE          reduce using rule 4 (decls -> epsilon .)
+    IF              reduce using rule 4 (decls -> epsilon .)
+    WHILE           reduce using rule 4 (decls -> epsilon .)
+    DO              reduce using rule 4 (decls -> epsilon .)
+    BREAK           reduce using rule 4 (decls -> epsilon .)
+    ID              reduce using rule 4 (decls -> epsilon .)
+    LLLAVE          reduce using rule 4 (decls -> epsilon .)
+
+
+state 6
+
+    (2) bloque -> LLLAVE decls instrs . RLLAVE
+    (11) instrs -> instrs . instr
+    (13) instr -> . loc IGUAL bool PUNTOYCOMA
+    (14) instr -> . IF LPAREN bool RPAREN instr
+    (15) instr -> . IF LPAREN bool RPAREN instr ELSE instr
+    (16) instr -> . WHILE LPAREN bool RPAREN instr
+    (17) instr -> . DO instr WHILE LPAREN bool RPAREN PUNTOYCOMA
+    (18) instr -> . BREAK PUNTOYCOMA
+    (19) instr -> . bloque
+    (20) loc -> . loc LCORCHETE bool RCORCHETE
+    (21) loc -> . ID
+    (2) bloque -> . LLLAVE decls instrs RLLAVE
+
+    RLLAVE          shift and go to state 13
+    IF              shift and go to state 16
+    WHILE           shift and go to state 17
+    DO              shift and go to state 18
+    BREAK           shift and go to state 19
+    ID              shift and go to state 21
+    LLLAVE          shift and go to state 3
+
+    instr                          shift and go to state 14
+    loc                            shift and go to state 15
+    bloque                         shift and go to state 20
+
+state 7
+
+    (3) decls -> decls decl .
+
+    INT             reduce using rule 3 (decls -> decls decl .)
+    FLOAT           reduce using rule 3 (decls -> decls decl .)
+    RLLAVE          reduce using rule 3 (decls -> decls decl .)
+    IF              reduce using rule 3 (decls -> decls decl .)
+    WHILE           reduce using rule 3 (decls -> decls decl .)
+    DO              reduce using rule 3 (decls -> decls decl .)
+    BREAK           reduce using rule 3 (decls -> decls decl .)
+    ID              reduce using rule 3 (decls -> decls decl .)
+    LLLAVE          reduce using rule 3 (decls -> decls decl .)
+
+
+state 8
+
+    (12) instrs -> epsilon .
+
+    RLLAVE          reduce using rule 12 (instrs -> epsilon .)
+    IF              reduce using rule 12 (instrs -> epsilon .)
+    WHILE           reduce using rule 12 (instrs -> epsilon .)
+    DO              reduce using rule 12 (instrs -> epsilon .)
+    BREAK           reduce using rule 12 (instrs -> epsilon .)
+    ID              reduce using rule 12 (instrs -> epsilon .)
+    LLLAVE          reduce using rule 12 (instrs -> epsilon .)
+
+
+state 9
+
+    (6) decl -> tipo . ID PUNTOYCOMA
+    (7) tipo -> tipo . LCORCHETE NUMERO RCORCHETE
+
+    ID              shift and go to state 22
+    LCORCHETE       shift and go to state 23
+
+
+state 10
+
+    (8) tipo -> basico .
+
+    ID              reduce using rule 8 (tipo -> basico .)
+    LCORCHETE       reduce using rule 8 (tipo -> basico .)
+
+
+state 11
+
+    (9) basico -> INT .
+
+    ID              reduce using rule 9 (basico -> INT .)
+    LCORCHETE       reduce using rule 9 (basico -> INT .)
+
+
+state 12
+
+    (10) basico -> FLOAT .
+
+    ID              reduce using rule 10 (basico -> FLOAT .)
+    LCORCHETE       reduce using rule 10 (basico -> FLOAT .)
+
+
+state 13
+
+    (2) bloque -> LLLAVE decls instrs RLLAVE .
+
+    $end            reduce using rule 2 (bloque -> LLLAVE decls instrs RLLAVE .)
+    RLLAVE          reduce using rule 2 (bloque -> LLLAVE decls instrs RLLAVE .)
+    IF              reduce using rule 2 (bloque -> LLLAVE decls instrs RLLAVE .)
+    WHILE           reduce using rule 2 (bloque -> LLLAVE decls instrs RLLAVE .)
+    DO              reduce using rule 2 (bloque -> LLLAVE decls instrs RLLAVE .)
+    BREAK           reduce using rule 2 (bloque -> LLLAVE decls instrs RLLAVE .)
+    ID              reduce using rule 2 (bloque -> LLLAVE decls instrs RLLAVE .)
+    LLLAVE          reduce using rule 2 (bloque -> LLLAVE decls instrs RLLAVE .)
+    ELSE            reduce using rule 2 (bloque -> LLLAVE decls instrs RLLAVE .)
+
+
+state 14
+
+    (11) instrs -> instrs instr .
+
+    RLLAVE          reduce using rule 11 (instrs -> instrs instr .)
+    IF              reduce using rule 11 (instrs -> instrs instr .)
+    WHILE           reduce using rule 11 (instrs -> instrs instr .)
+    DO              reduce using rule 11 (instrs -> instrs instr .)
+    BREAK           reduce using rule 11 (instrs -> instrs instr .)
+    ID              reduce using rule 11 (instrs -> instrs instr .)
+    LLLAVE          reduce using rule 11 (instrs -> instrs instr .)
+
+
+state 15
+
+    (13) instr -> loc . IGUAL bool PUNTOYCOMA
+    (20) loc -> loc . LCORCHETE bool RCORCHETE
+
+    IGUAL           shift and go to state 24
+    LCORCHETE       shift and go to state 25
+
+
+state 16
+
+    (14) instr -> IF . LPAREN bool RPAREN instr
+    (15) instr -> IF . LPAREN bool RPAREN instr ELSE instr
+
+    LPAREN          shift and go to state 26
+
+
+state 17
+
+    (16) instr -> WHILE . LPAREN bool RPAREN instr
+
+    LPAREN          shift and go to state 27
+
+
+state 18
+
+    (17) instr -> DO . instr WHILE LPAREN bool RPAREN PUNTOYCOMA
+    (13) instr -> . loc IGUAL bool PUNTOYCOMA
+    (14) instr -> . IF LPAREN bool RPAREN instr
+    (15) instr -> . IF LPAREN bool RPAREN instr ELSE instr
+    (16) instr -> . WHILE LPAREN bool RPAREN instr
+    (17) instr -> . DO instr WHILE LPAREN bool RPAREN PUNTOYCOMA
+    (18) instr -> . BREAK PUNTOYCOMA
+    (19) instr -> . bloque
+    (20) loc -> . loc LCORCHETE bool RCORCHETE
+    (21) loc -> . ID
+    (2) bloque -> . LLLAVE decls instrs RLLAVE
+
+    IF              shift and go to state 16
+    WHILE           shift and go to state 17
+    DO              shift and go to state 18
+    BREAK           shift and go to state 19
+    ID              shift and go to state 21
+    LLLAVE          shift and go to state 3
+
+    instr                          shift and go to state 28
+    loc                            shift and go to state 15
+    bloque                         shift and go to state 20
+
+state 19
+
+    (18) instr -> BREAK . PUNTOYCOMA
+
+    PUNTOYCOMA      shift and go to state 29
+
+
+state 20
+
+    (19) instr -> bloque .
+
+    RLLAVE          reduce using rule 19 (instr -> bloque .)
+    IF              reduce using rule 19 (instr -> bloque .)
+    WHILE           reduce using rule 19 (instr -> bloque .)
+    DO              reduce using rule 19 (instr -> bloque .)
+    BREAK           reduce using rule 19 (instr -> bloque .)
+    ID              reduce using rule 19 (instr -> bloque .)
+    LLLAVE          reduce using rule 19 (instr -> bloque .)
+    ELSE            reduce using rule 19 (instr -> bloque .)
+
+
+state 21
+
+    (21) loc -> ID .
+
+    IGUAL           reduce using rule 21 (loc -> ID .)
+    LCORCHETE       reduce using rule 21 (loc -> ID .)
+    MULTIPLICACION  reduce using rule 21 (loc -> ID .)
+    DIVISION        reduce using rule 21 (loc -> ID .)
+    LT              reduce using rule 21 (loc -> ID .)
+    LE              reduce using rule 21 (loc -> ID .)
+    GE              reduce using rule 21 (loc -> ID .)
+    GT              reduce using rule 21 (loc -> ID .)
+    MAS             reduce using rule 21 (loc -> ID .)
+    MENOS           reduce using rule 21 (loc -> ID .)
+    IGUALES         reduce using rule 21 (loc -> ID .)
+    NE              reduce using rule 21 (loc -> ID .)
+    AND             reduce using rule 21 (loc -> ID .)
+    PUNTOYCOMA      reduce using rule 21 (loc -> ID .)
+    OR              reduce using rule 21 (loc -> ID .)
+    RCORCHETE       reduce using rule 21 (loc -> ID .)
+    RPAREN          reduce using rule 21 (loc -> ID .)
+
+
+state 22
+
+    (6) decl -> tipo ID . PUNTOYCOMA
+
+    PUNTOYCOMA      shift and go to state 30
+
+
+state 23
+
+    (7) tipo -> tipo LCORCHETE . NUMERO RCORCHETE
+
+    NUMERO          shift and go to state 31
+
+
+state 24
+
+    (13) instr -> loc IGUAL . bool PUNTOYCOMA
+    (22) bool -> . bool OR comb
+    (23) bool -> . comb
+    (24) comb -> . comb AND igualdad
+    (25) comb -> . igualdad
+    (26) igualdad -> . igualdad IGUALES rel
+    (27) igualdad -> . igualdad NE rel
+    (28) igualdad -> . rel
+    (29) rel -> . expr LT expr
+    (30) rel -> . expr LE expr
+    (31) rel -> . expr GE expr
+    (32) rel -> . expr GT expr
+    (33) rel -> . expr
+    (34) expr -> . expr MAS term
+    (35) expr -> . expr MENOS term
+    (36) expr -> . term
+    (37) term -> . term MULTIPLICACION unario
+    (38) term -> . term DIVISION unario
+    (39) term -> . unario
+    (40) unario -> . NOT unario
+    (41) unario -> . MENOS unario
+    (42) unario -> . factor
+    (43) factor -> . LPAREN bool RPAREN
+    (44) factor -> . loc
+    (45) factor -> . NUMERO
+    (46) factor -> . REAL
+    (47) factor -> . TRUE
+    (48) factor -> . FALSE
+    (20) loc -> . loc LCORCHETE bool RCORCHETE
+    (21) loc -> . ID
+
+    NOT             shift and go to state 41
+    MENOS           shift and go to state 39
+    LPAREN          shift and go to state 43
+    NUMERO          shift and go to state 44
+    REAL            shift and go to state 45
+    TRUE            shift and go to state 46
+    FALSE           shift and go to state 47
+    ID              shift and go to state 21
+
+    loc                            shift and go to state 32
+    bool                           shift and go to state 33
+    comb                           shift and go to state 34
+    igualdad                       shift and go to state 35
+    rel                            shift and go to state 36
+    expr                           shift and go to state 37
+    term                           shift and go to state 38
+    unario                         shift and go to state 40
+    factor                         shift and go to state 42
+
+state 25
+
+    (20) loc -> loc LCORCHETE . bool RCORCHETE
+    (22) bool -> . bool OR comb
+    (23) bool -> . comb
+    (24) comb -> . comb AND igualdad
+    (25) comb -> . igualdad
+    (26) igualdad -> . igualdad IGUALES rel
+    (27) igualdad -> . igualdad NE rel
+    (28) igualdad -> . rel
+    (29) rel -> . expr LT expr
+    (30) rel -> . expr LE expr
+    (31) rel -> . expr GE expr
+    (32) rel -> . expr GT expr
+    (33) rel -> . expr
+    (34) expr -> . expr MAS term
+    (35) expr -> . expr MENOS term
+    (36) expr -> . term
+    (37) term -> . term MULTIPLICACION unario
+    (38) term -> . term DIVISION unario
+    (39) term -> . unario
+    (40) unario -> . NOT unario
+    (41) unario -> . MENOS unario
+    (42) unario -> . factor
+    (43) factor -> . LPAREN bool RPAREN
+    (44) factor -> . loc
+    (45) factor -> . NUMERO
+    (46) factor -> . REAL
+    (47) factor -> . TRUE
+    (48) factor -> . FALSE
+    (20) loc -> . loc LCORCHETE bool RCORCHETE
+    (21) loc -> . ID
+
+    NOT             shift and go to state 41
+    MENOS           shift and go to state 39
+    LPAREN          shift and go to state 43
+    NUMERO          shift and go to state 44
+    REAL            shift and go to state 45
+    TRUE            shift and go to state 46
+    FALSE           shift and go to state 47
+    ID              shift and go to state 21
+
+    loc                            shift and go to state 32
+    bool                           shift and go to state 48
+    comb                           shift and go to state 34
+    igualdad                       shift and go to state 35
+    rel                            shift and go to state 36
+    expr                           shift and go to state 37
+    term                           shift and go to state 38
+    unario                         shift and go to state 40
+    factor                         shift and go to state 42
+
+state 26
+
+    (14) instr -> IF LPAREN . bool RPAREN instr
+    (15) instr -> IF LPAREN . bool RPAREN instr ELSE instr
+    (22) bool -> . bool OR comb
+    (23) bool -> . comb
+    (24) comb -> . comb AND igualdad
+    (25) comb -> . igualdad
+    (26) igualdad -> . igualdad IGUALES rel
+    (27) igualdad -> . igualdad NE rel
+    (28) igualdad -> . rel
+    (29) rel -> . expr LT expr
+    (30) rel -> . expr LE expr
+    (31) rel -> . expr GE expr
+    (32) rel -> . expr GT expr
+    (33) rel -> . expr
+    (34) expr -> . expr MAS term
+    (35) expr -> . expr MENOS term
+    (36) expr -> . term
+    (37) term -> . term MULTIPLICACION unario
+    (38) term -> . term DIVISION unario
+    (39) term -> . unario
+    (40) unario -> . NOT unario
+    (41) unario -> . MENOS unario
+    (42) unario -> . factor
+    (43) factor -> . LPAREN bool RPAREN
+    (44) factor -> . loc
+    (45) factor -> . NUMERO
+    (46) factor -> . REAL
+    (47) factor -> . TRUE
+    (48) factor -> . FALSE
+    (20) loc -> . loc LCORCHETE bool RCORCHETE
+    (21) loc -> . ID
+
+    NOT             shift and go to state 41
+    MENOS           shift and go to state 39
+    LPAREN          shift and go to state 43
+    NUMERO          shift and go to state 44
+    REAL            shift and go to state 45
+    TRUE            shift and go to state 46
+    FALSE           shift and go to state 47
+    ID              shift and go to state 21
+
+    bool                           shift and go to state 49
+    comb                           shift and go to state 34
+    igualdad                       shift and go to state 35
+    rel                            shift and go to state 36
+    expr                           shift and go to state 37
+    term                           shift and go to state 38
+    unario                         shift and go to state 40
+    factor                         shift and go to state 42
+    loc                            shift and go to state 32
+
+state 27
+
+    (16) instr -> WHILE LPAREN . bool RPAREN instr
+    (22) bool -> . bool OR comb
+    (23) bool -> . comb
+    (24) comb -> . comb AND igualdad
+    (25) comb -> . igualdad
+    (26) igualdad -> . igualdad IGUALES rel
+    (27) igualdad -> . igualdad NE rel
+    (28) igualdad -> . rel
+    (29) rel -> . expr LT expr
+    (30) rel -> . expr LE expr
+    (31) rel -> . expr GE expr
+    (32) rel -> . expr GT expr
+    (33) rel -> . expr
+    (34) expr -> . expr MAS term
+    (35) expr -> . expr MENOS term
+    (36) expr -> . term
+    (37) term -> . term MULTIPLICACION unario
+    (38) term -> . term DIVISION unario
+    (39) term -> . unario
+    (40) unario -> . NOT unario
+    (41) unario -> . MENOS unario
+    (42) unario -> . factor
+    (43) factor -> . LPAREN bool RPAREN
+    (44) factor -> . loc
+    (45) factor -> . NUMERO
+    (46) factor -> . REAL
+    (47) factor -> . TRUE
+    (48) factor -> . FALSE
+    (20) loc -> . loc LCORCHETE bool RCORCHETE
+    (21) loc -> . ID
+
+    NOT             shift and go to state 41
+    MENOS           shift and go to state 39
+    LPAREN          shift and go to state 43
+    NUMERO          shift and go to state 44
+    REAL            shift and go to state 45
+    TRUE            shift and go to state 46
+    FALSE           shift and go to state 47
+    ID              shift and go to state 21
+
+    bool                           shift and go to state 50
+    comb                           shift and go to state 34
+    igualdad                       shift and go to state 35
+    rel                            shift and go to state 36
+    expr                           shift and go to state 37
+    term                           shift and go to state 38
+    unario                         shift and go to state 40
+    factor                         shift and go to state 42
+    loc                            shift and go to state 32
+
+state 28
+
+    (17) instr -> DO instr . WHILE LPAREN bool RPAREN PUNTOYCOMA
+
+    WHILE           shift and go to state 51
+
+
+state 29
+
+    (18) instr -> BREAK PUNTOYCOMA .
+
+    RLLAVE          reduce using rule 18 (instr -> BREAK PUNTOYCOMA .)
+    IF              reduce using rule 18 (instr -> BREAK PUNTOYCOMA .)
+    WHILE           reduce using rule 18 (instr -> BREAK PUNTOYCOMA .)
+    DO              reduce using rule 18 (instr -> BREAK PUNTOYCOMA .)
+    BREAK           reduce using rule 18 (instr -> BREAK PUNTOYCOMA .)
+    ID              reduce using rule 18 (instr -> BREAK PUNTOYCOMA .)
+    LLLAVE          reduce using rule 18 (instr -> BREAK PUNTOYCOMA .)
+    ELSE            reduce using rule 18 (instr -> BREAK PUNTOYCOMA .)
+
+
+state 30
+
+    (6) decl -> tipo ID PUNTOYCOMA .
+
+    INT             reduce using rule 6 (decl -> tipo ID PUNTOYCOMA .)
+    FLOAT           reduce using rule 6 (decl -> tipo ID PUNTOYCOMA .)
+    RLLAVE          reduce using rule 6 (decl -> tipo ID PUNTOYCOMA .)
+    IF              reduce using rule 6 (decl -> tipo ID PUNTOYCOMA .)
+    WHILE           reduce using rule 6 (decl -> tipo ID PUNTOYCOMA .)
+    DO              reduce using rule 6 (decl -> tipo ID PUNTOYCOMA .)
+    BREAK           reduce using rule 6 (decl -> tipo ID PUNTOYCOMA .)
+    ID              reduce using rule 6 (decl -> tipo ID PUNTOYCOMA .)
+    LLLAVE          reduce using rule 6 (decl -> tipo ID PUNTOYCOMA .)
+
+
+state 31
+
+    (7) tipo -> tipo LCORCHETE NUMERO . RCORCHETE
+
+    RCORCHETE       shift and go to state 52
+
+
+state 32
+
+    (44) factor -> loc .
+    (20) loc -> loc . LCORCHETE bool RCORCHETE
+
+    MULTIPLICACION  reduce using rule 44 (factor -> loc .)
+    DIVISION        reduce using rule 44 (factor -> loc .)
+    LT              reduce using rule 44 (factor -> loc .)
+    LE              reduce using rule 44 (factor -> loc .)
+    GE              reduce using rule 44 (factor -> loc .)
+    GT              reduce using rule 44 (factor -> loc .)
+    MAS             reduce using rule 44 (factor -> loc .)
+    MENOS           reduce using rule 44 (factor -> loc .)
+    IGUALES         reduce using rule 44 (factor -> loc .)
+    NE              reduce using rule 44 (factor -> loc .)
+    AND             reduce using rule 44 (factor -> loc .)
+    PUNTOYCOMA      reduce using rule 44 (factor -> loc .)
+    OR              reduce using rule 44 (factor -> loc .)
+    RCORCHETE       reduce using rule 44 (factor -> loc .)
+    RPAREN          reduce using rule 44 (factor -> loc .)
+    LCORCHETE       shift and go to state 25
+
+
+state 33
+
+    (13) instr -> loc IGUAL bool . PUNTOYCOMA
+    (22) bool -> bool . OR comb
+
+    PUNTOYCOMA      shift and go to state 53
+    OR              shift and go to state 54
+
+
+state 34
+
+    (23) bool -> comb .
+    (24) comb -> comb . AND igualdad
+
+    PUNTOYCOMA      reduce using rule 23 (bool -> comb .)
+    OR              reduce using rule 23 (bool -> comb .)
+    RCORCHETE       reduce using rule 23 (bool -> comb .)
+    RPAREN          reduce using rule 23 (bool -> comb .)
+    AND             shift and go to state 55
+
+
+state 35
+
+    (25) comb -> igualdad .
+    (26) igualdad -> igualdad . IGUALES rel
+    (27) igualdad -> igualdad . NE rel
+
+    AND             reduce using rule 25 (comb -> igualdad .)
+    PUNTOYCOMA      reduce using rule 25 (comb -> igualdad .)
+    OR              reduce using rule 25 (comb -> igualdad .)
+    RCORCHETE       reduce using rule 25 (comb -> igualdad .)
+    RPAREN          reduce using rule 25 (comb -> igualdad .)
+    IGUALES         shift and go to state 56
+    NE              shift and go to state 57
+
+
+state 36
+
+    (28) igualdad -> rel .
+
+    IGUALES         reduce using rule 28 (igualdad -> rel .)
+    NE              reduce using rule 28 (igualdad -> rel .)
+    AND             reduce using rule 28 (igualdad -> rel .)
+    PUNTOYCOMA      reduce using rule 28 (igualdad -> rel .)
+    OR              reduce using rule 28 (igualdad -> rel .)
+    RCORCHETE       reduce using rule 28 (igualdad -> rel .)
+    RPAREN          reduce using rule 28 (igualdad -> rel .)
+
+
+state 37
+
+    (29) rel -> expr . LT expr
+    (30) rel -> expr . LE expr
+    (31) rel -> expr . GE expr
+    (32) rel -> expr . GT expr
+    (33) rel -> expr .
+    (34) expr -> expr . MAS term
+    (35) expr -> expr . MENOS term
+
+    LT              shift and go to state 58
+    LE              shift and go to state 59
+    GE              shift and go to state 60
+    GT              shift and go to state 61
+    IGUALES         reduce using rule 33 (rel -> expr .)
+    NE              reduce using rule 33 (rel -> expr .)
+    AND             reduce using rule 33 (rel -> expr .)
+    PUNTOYCOMA      reduce using rule 33 (rel -> expr .)
+    OR              reduce using rule 33 (rel -> expr .)
+    RCORCHETE       reduce using rule 33 (rel -> expr .)
+    RPAREN          reduce using rule 33 (rel -> expr .)
+    MAS             shift and go to state 62
+    MENOS           shift and go to state 63
+
+
+state 38
+
+    (36) expr -> term .
+    (37) term -> term . MULTIPLICACION unario
+    (38) term -> term . DIVISION unario
+
+    LT              reduce using rule 36 (expr -> term .)
+    LE              reduce using rule 36 (expr -> term .)
+    GE              reduce using rule 36 (expr -> term .)
+    GT              reduce using rule 36 (expr -> term .)
+    MAS             reduce using rule 36 (expr -> term .)
+    MENOS           reduce using rule 36 (expr -> term .)
+    IGUALES         reduce using rule 36 (expr -> term .)
+    NE              reduce using rule 36 (expr -> term .)
+    AND             reduce using rule 36 (expr -> term .)
+    PUNTOYCOMA      reduce using rule 36 (expr -> term .)
+    OR              reduce using rule 36 (expr -> term .)
+    RCORCHETE       reduce using rule 36 (expr -> term .)
+    RPAREN          reduce using rule 36 (expr -> term .)
+    MULTIPLICACION  shift and go to state 64
+    DIVISION        shift and go to state 65
+
+
+state 39
+
+    (41) unario -> MENOS . unario
+    (40) unario -> . NOT unario
+    (41) unario -> . MENOS unario
+    (42) unario -> . factor
+    (43) factor -> . LPAREN bool RPAREN
+    (44) factor -> . loc
+    (45) factor -> . NUMERO
+    (46) factor -> . REAL
+    (47) factor -> . TRUE
+    (48) factor -> . FALSE
+    (20) loc -> . loc LCORCHETE bool RCORCHETE
+    (21) loc -> . ID
+
+    NOT             shift and go to state 41
+    MENOS           shift and go to state 39
+    LPAREN          shift and go to state 43
+    NUMERO          shift and go to state 44
+    REAL            shift and go to state 45
+    TRUE            shift and go to state 46
+    FALSE           shift and go to state 47
+    ID              shift and go to state 21
+
+    unario                         shift and go to state 66
+    factor                         shift and go to state 42
+    loc                            shift and go to state 32
+
+state 40
+
+    (39) term -> unario .
+
+    MULTIPLICACION  reduce using rule 39 (term -> unario .)
+    DIVISION        reduce using rule 39 (term -> unario .)
+    LT              reduce using rule 39 (term -> unario .)
+    LE              reduce using rule 39 (term -> unario .)
+    GE              reduce using rule 39 (term -> unario .)
+    GT              reduce using rule 39 (term -> unario .)
+    MAS             reduce using rule 39 (term -> unario .)
+    MENOS           reduce using rule 39 (term -> unario .)
+    IGUALES         reduce using rule 39 (term -> unario .)
+    NE              reduce using rule 39 (term -> unario .)
+    AND             reduce using rule 39 (term -> unario .)
+    PUNTOYCOMA      reduce using rule 39 (term -> unario .)
+    OR              reduce using rule 39 (term -> unario .)
+    RCORCHETE       reduce using rule 39 (term -> unario .)
+    RPAREN          reduce using rule 39 (term -> unario .)
+
+
+state 41
+
+    (40) unario -> NOT . unario
+    (40) unario -> . NOT unario
+    (41) unario -> . MENOS unario
+    (42) unario -> . factor
+    (43) factor -> . LPAREN bool RPAREN
+    (44) factor -> . loc
+    (45) factor -> . NUMERO
+    (46) factor -> . REAL
+    (47) factor -> . TRUE
+    (48) factor -> . FALSE
+    (20) loc -> . loc LCORCHETE bool RCORCHETE
+    (21) loc -> . ID
+
+    NOT             shift and go to state 41
+    MENOS           shift and go to state 39
+    LPAREN          shift and go to state 43
+    NUMERO          shift and go to state 44
+    REAL            shift and go to state 45
+    TRUE            shift and go to state 46
+    FALSE           shift and go to state 47
+    ID              shift and go to state 21
+
+    unario                         shift and go to state 67
+    factor                         shift and go to state 42
+    loc                            shift and go to state 32
+
+state 42
+
+    (42) unario -> factor .
+
+    MULTIPLICACION  reduce using rule 42 (unario -> factor .)
+    DIVISION        reduce using rule 42 (unario -> factor .)
+    LT              reduce using rule 42 (unario -> factor .)
+    LE              reduce using rule 42 (unario -> factor .)
+    GE              reduce using rule 42 (unario -> factor .)
+    GT              reduce using rule 42 (unario -> factor .)
+    MAS             reduce using rule 42 (unario -> factor .)
+    MENOS           reduce using rule 42 (unario -> factor .)
+    IGUALES         reduce using rule 42 (unario -> factor .)
+    NE              reduce using rule 42 (unario -> factor .)
+    AND             reduce using rule 42 (unario -> factor .)
+    PUNTOYCOMA      reduce using rule 42 (unario -> factor .)
+    OR              reduce using rule 42 (unario -> factor .)
+    RCORCHETE       reduce using rule 42 (unario -> factor .)
+    RPAREN          reduce using rule 42 (unario -> factor .)
+
+
+state 43
+
+    (43) factor -> LPAREN . bool RPAREN
+    (22) bool -> . bool OR comb
+    (23) bool -> . comb
+    (24) comb -> . comb AND igualdad
+    (25) comb -> . igualdad
+    (26) igualdad -> . igualdad IGUALES rel
+    (27) igualdad -> . igualdad NE rel
+    (28) igualdad -> . rel
+    (29) rel -> . expr LT expr
+    (30) rel -> . expr LE expr
+    (31) rel -> . expr GE expr
+    (32) rel -> . expr GT expr
+    (33) rel -> . expr
+    (34) expr -> . expr MAS term
+    (35) expr -> . expr MENOS term
+    (36) expr -> . term
+    (37) term -> . term MULTIPLICACION unario
+    (38) term -> . term DIVISION unario
+    (39) term -> . unario
+    (40) unario -> . NOT unario
+    (41) unario -> . MENOS unario
+    (42) unario -> . factor
+    (43) factor -> . LPAREN bool RPAREN
+    (44) factor -> . loc
+    (45) factor -> . NUMERO
+    (46) factor -> . REAL
+    (47) factor -> . TRUE
+    (48) factor -> . FALSE
+    (20) loc -> . loc LCORCHETE bool RCORCHETE
+    (21) loc -> . ID
+
+    NOT             shift and go to state 41
+    MENOS           shift and go to state 39
+    LPAREN          shift and go to state 43
+    NUMERO          shift and go to state 44
+    REAL            shift and go to state 45
+    TRUE            shift and go to state 46
+    FALSE           shift and go to state 47
+    ID              shift and go to state 21
+
+    bool                           shift and go to state 68
+    comb                           shift and go to state 34
+    igualdad                       shift and go to state 35
+    rel                            shift and go to state 36
+    expr                           shift and go to state 37
+    term                           shift and go to state 38
+    unario                         shift and go to state 40
+    factor                         shift and go to state 42
+    loc                            shift and go to state 32
+
+state 44
+
+    (45) factor -> NUMERO .
+
+    MULTIPLICACION  reduce using rule 45 (factor -> NUMERO .)
+    DIVISION        reduce using rule 45 (factor -> NUMERO .)
+    LT              reduce using rule 45 (factor -> NUMERO .)
+    LE              reduce using rule 45 (factor -> NUMERO .)
+    GE              reduce using rule 45 (factor -> NUMERO .)
+    GT              reduce using rule 45 (factor -> NUMERO .)
+    MAS             reduce using rule 45 (factor -> NUMERO .)
+    MENOS           reduce using rule 45 (factor -> NUMERO .)
+    IGUALES         reduce using rule 45 (factor -> NUMERO .)
+    NE              reduce using rule 45 (factor -> NUMERO .)
+    AND             reduce using rule 45 (factor -> NUMERO .)
+    PUNTOYCOMA      reduce using rule 45 (factor -> NUMERO .)
+    OR              reduce using rule 45 (factor -> NUMERO .)
+    RCORCHETE       reduce using rule 45 (factor -> NUMERO .)
+    RPAREN          reduce using rule 45 (factor -> NUMERO .)
+
+
+state 45
+
+    (46) factor -> REAL .
+
+    MULTIPLICACION  reduce using rule 46 (factor -> REAL .)
+    DIVISION        reduce using rule 46 (factor -> REAL .)
+    LT              reduce using rule 46 (factor -> REAL .)
+    LE              reduce using rule 46 (factor -> REAL .)
+    GE              reduce using rule 46 (factor -> REAL .)
+    GT              reduce using rule 46 (factor -> REAL .)
+    MAS             reduce using rule 46 (factor -> REAL .)
+    MENOS           reduce using rule 46 (factor -> REAL .)
+    IGUALES         reduce using rule 46 (factor -> REAL .)
+    NE              reduce using rule 46 (factor -> REAL .)
+    AND             reduce using rule 46 (factor -> REAL .)
+    PUNTOYCOMA      reduce using rule 46 (factor -> REAL .)
+    OR              reduce using rule 46 (factor -> REAL .)
+    RCORCHETE       reduce using rule 46 (factor -> REAL .)
+    RPAREN          reduce using rule 46 (factor -> REAL .)
+
+
+state 46
+
+    (47) factor -> TRUE .
+
+    MULTIPLICACION  reduce using rule 47 (factor -> TRUE .)
+    DIVISION        reduce using rule 47 (factor -> TRUE .)
+    LT              reduce using rule 47 (factor -> TRUE .)
+    LE              reduce using rule 47 (factor -> TRUE .)
+    GE              reduce using rule 47 (factor -> TRUE .)
+    GT              reduce using rule 47 (factor -> TRUE .)
+    MAS             reduce using rule 47 (factor -> TRUE .)
+    MENOS           reduce using rule 47 (factor -> TRUE .)
+    IGUALES         reduce using rule 47 (factor -> TRUE .)
+    NE              reduce using rule 47 (factor -> TRUE .)
+    AND             reduce using rule 47 (factor -> TRUE .)
+    PUNTOYCOMA      reduce using rule 47 (factor -> TRUE .)
+    OR              reduce using rule 47 (factor -> TRUE .)
+    RCORCHETE       reduce using rule 47 (factor -> TRUE .)
+    RPAREN          reduce using rule 47 (factor -> TRUE .)
+
+
+state 47
+
+    (48) factor -> FALSE .
+
+    MULTIPLICACION  reduce using rule 48 (factor -> FALSE .)
+    DIVISION        reduce using rule 48 (factor -> FALSE .)
+    LT              reduce using rule 48 (factor -> FALSE .)
+    LE              reduce using rule 48 (factor -> FALSE .)
+    GE              reduce using rule 48 (factor -> FALSE .)
+    GT              reduce using rule 48 (factor -> FALSE .)
+    MAS             reduce using rule 48 (factor -> FALSE .)
+    MENOS           reduce using rule 48 (factor -> FALSE .)
+    IGUALES         reduce using rule 48 (factor -> FALSE .)
+    NE              reduce using rule 48 (factor -> FALSE .)
+    AND             reduce using rule 48 (factor -> FALSE .)
+    PUNTOYCOMA      reduce using rule 48 (factor -> FALSE .)
+    OR              reduce using rule 48 (factor -> FALSE .)
+    RCORCHETE       reduce using rule 48 (factor -> FALSE .)
+    RPAREN          reduce using rule 48 (factor -> FALSE .)
+
+
+state 48
+
+    (20) loc -> loc LCORCHETE bool . RCORCHETE
+    (22) bool -> bool . OR comb
+
+    RCORCHETE       shift and go to state 69
+    OR              shift and go to state 54
+
+
+state 49
+
+    (14) instr -> IF LPAREN bool . RPAREN instr
+    (15) instr -> IF LPAREN bool . RPAREN instr ELSE instr
+    (22) bool -> bool . OR comb
+
+    RPAREN          shift and go to state 70
+    OR              shift and go to state 54
+
+
+state 50
+
+    (16) instr -> WHILE LPAREN bool . RPAREN instr
+    (22) bool -> bool . OR comb
+
+    RPAREN          shift and go to state 71
+    OR              shift and go to state 54
+
+
+state 51
+
+    (17) instr -> DO instr WHILE . LPAREN bool RPAREN PUNTOYCOMA
+
+    LPAREN          shift and go to state 72
+
+
+state 52
+
+    (7) tipo -> tipo LCORCHETE NUMERO RCORCHETE .
+
+    ID              reduce using rule 7 (tipo -> tipo LCORCHETE NUMERO RCORCHETE .)
+    LCORCHETE       reduce using rule 7 (tipo -> tipo LCORCHETE NUMERO RCORCHETE .)
+
+
+state 53
+
+    (13) instr -> loc IGUAL bool PUNTOYCOMA .
+
+    RLLAVE          reduce using rule 13 (instr -> loc IGUAL bool PUNTOYCOMA .)
+    IF              reduce using rule 13 (instr -> loc IGUAL bool PUNTOYCOMA .)
+    WHILE           reduce using rule 13 (instr -> loc IGUAL bool PUNTOYCOMA .)
+    DO              reduce using rule 13 (instr -> loc IGUAL bool PUNTOYCOMA .)
+    BREAK           reduce using rule 13 (instr -> loc IGUAL bool PUNTOYCOMA .)
+    ID              reduce using rule 13 (instr -> loc IGUAL bool PUNTOYCOMA .)
+    LLLAVE          reduce using rule 13 (instr -> loc IGUAL bool PUNTOYCOMA .)
+    ELSE            reduce using rule 13 (instr -> loc IGUAL bool PUNTOYCOMA .)
+
+
+state 54
+
+    (22) bool -> bool OR . comb
+    (24) comb -> . comb AND igualdad
+    (25) comb -> . igualdad
+    (26) igualdad -> . igualdad IGUALES rel
+    (27) igualdad -> . igualdad NE rel
+    (28) igualdad -> . rel
+    (29) rel -> . expr LT expr
+    (30) rel -> . expr LE expr
+    (31) rel -> . expr GE expr
+    (32) rel -> . expr GT expr
+    (33) rel -> . expr
+    (34) expr -> . expr MAS term
+    (35) expr -> . expr MENOS term
+    (36) expr -> . term
+    (37) term -> . term MULTIPLICACION unario
+    (38) term -> . term DIVISION unario
+    (39) term -> . unario
+    (40) unario -> . NOT unario
+    (41) unario -> . MENOS unario
+    (42) unario -> . factor
+    (43) factor -> . LPAREN bool RPAREN
+    (44) factor -> . loc
+    (45) factor -> . NUMERO
+    (46) factor -> . REAL
+    (47) factor -> . TRUE
+    (48) factor -> . FALSE
+    (20) loc -> . loc LCORCHETE bool RCORCHETE
+    (21) loc -> . ID
+
+    NOT             shift and go to state 41
+    MENOS           shift and go to state 39
+    LPAREN          shift and go to state 43
+    NUMERO          shift and go to state 44
+    REAL            shift and go to state 45
+    TRUE            shift and go to state 46
+    FALSE           shift and go to state 47
+    ID              shift and go to state 21
+
+    comb                           shift and go to state 73
+    igualdad                       shift and go to state 35
+    rel                            shift and go to state 36
+    expr                           shift and go to state 37
+    term                           shift and go to state 38
+    unario                         shift and go to state 40
+    factor                         shift and go to state 42
+    loc                            shift and go to state 32
+
+state 55
+
+    (24) comb -> comb AND . igualdad
+    (26) igualdad -> . igualdad IGUALES rel
+    (27) igualdad -> . igualdad NE rel
+    (28) igualdad -> . rel
+    (29) rel -> . expr LT expr
+    (30) rel -> . expr LE expr
+    (31) rel -> . expr GE expr
+    (32) rel -> . expr GT expr
+    (33) rel -> . expr
+    (34) expr -> . expr MAS term
+    (35) expr -> . expr MENOS term
+    (36) expr -> . term
+    (37) term -> . term MULTIPLICACION unario
+    (38) term -> . term DIVISION unario
+    (39) term -> . unario
+    (40) unario -> . NOT unario
+    (41) unario -> . MENOS unario
+    (42) unario -> . factor
+    (43) factor -> . LPAREN bool RPAREN
+    (44) factor -> . loc
+    (45) factor -> . NUMERO
+    (46) factor -> . REAL
+    (47) factor -> . TRUE
+    (48) factor -> . FALSE
+    (20) loc -> . loc LCORCHETE bool RCORCHETE
+    (21) loc -> . ID
+
+    NOT             shift and go to state 41
+    MENOS           shift and go to state 39
+    LPAREN          shift and go to state 43
+    NUMERO          shift and go to state 44
+    REAL            shift and go to state 45
+    TRUE            shift and go to state 46
+    FALSE           shift and go to state 47
+    ID              shift and go to state 21
+
+    igualdad                       shift and go to state 74
+    rel                            shift and go to state 36
+    expr                           shift and go to state 37
+    term                           shift and go to state 38
+    unario                         shift and go to state 40
+    factor                         shift and go to state 42
+    loc                            shift and go to state 32
+
+state 56
+
+    (26) igualdad -> igualdad IGUALES . rel
+    (29) rel -> . expr LT expr
+    (30) rel -> . expr LE expr
+    (31) rel -> . expr GE expr
+    (32) rel -> . expr GT expr
+    (33) rel -> . expr
+    (34) expr -> . expr MAS term
+    (35) expr -> . expr MENOS term
+    (36) expr -> . term
+    (37) term -> . term MULTIPLICACION unario
+    (38) term -> . term DIVISION unario
+    (39) term -> . unario
+    (40) unario -> . NOT unario
+    (41) unario -> . MENOS unario
+    (42) unario -> . factor
+    (43) factor -> . LPAREN bool RPAREN
+    (44) factor -> . loc
+    (45) factor -> . NUMERO
+    (46) factor -> . REAL
+    (47) factor -> . TRUE
+    (48) factor -> . FALSE
+    (20) loc -> . loc LCORCHETE bool RCORCHETE
+    (21) loc -> . ID
+
+    NOT             shift and go to state 41
+    MENOS           shift and go to state 39
+    LPAREN          shift and go to state 43
+    NUMERO          shift and go to state 44
+    REAL            shift and go to state 45
+    TRUE            shift and go to state 46
+    FALSE           shift and go to state 47
+    ID              shift and go to state 21
+
+    rel                            shift and go to state 75
+    expr                           shift and go to state 37
+    term                           shift and go to state 38
+    unario                         shift and go to state 40
+    factor                         shift and go to state 42
+    loc                            shift and go to state 32
+
+state 57
+
+    (27) igualdad -> igualdad NE . rel
+    (29) rel -> . expr LT expr
+    (30) rel -> . expr LE expr
+    (31) rel -> . expr GE expr
+    (32) rel -> . expr GT expr
+    (33) rel -> . expr
+    (34) expr -> . expr MAS term
+    (35) expr -> . expr MENOS term
+    (36) expr -> . term
+    (37) term -> . term MULTIPLICACION unario
+    (38) term -> . term DIVISION unario
+    (39) term -> . unario
+    (40) unario -> . NOT unario
+    (41) unario -> . MENOS unario
+    (42) unario -> . factor
+    (43) factor -> . LPAREN bool RPAREN
+    (44) factor -> . loc
+    (45) factor -> . NUMERO
+    (46) factor -> . REAL
+    (47) factor -> . TRUE
+    (48) factor -> . FALSE
+    (20) loc -> . loc LCORCHETE bool RCORCHETE
+    (21) loc -> . ID
+
+    NOT             shift and go to state 41
+    MENOS           shift and go to state 39
+    LPAREN          shift and go to state 43
+    NUMERO          shift and go to state 44
+    REAL            shift and go to state 45
+    TRUE            shift and go to state 46
+    FALSE           shift and go to state 47
+    ID              shift and go to state 21
+
+    rel                            shift and go to state 76
+    expr                           shift and go to state 37
+    term                           shift and go to state 38
+    unario                         shift and go to state 40
+    factor                         shift and go to state 42
+    loc                            shift and go to state 32
+
+state 58
+
+    (29) rel -> expr LT . expr
+    (34) expr -> . expr MAS term
+    (35) expr -> . expr MENOS term
+    (36) expr -> . term
+    (37) term -> . term MULTIPLICACION unario
+    (38) term -> . term DIVISION unario
+    (39) term -> . unario
+    (40) unario -> . NOT unario
+    (41) unario -> . MENOS unario
+    (42) unario -> . factor
+    (43) factor -> . LPAREN bool RPAREN
+    (44) factor -> . loc
+    (45) factor -> . NUMERO
+    (46) factor -> . REAL
+    (47) factor -> . TRUE
+    (48) factor -> . FALSE
+    (20) loc -> . loc LCORCHETE bool RCORCHETE
+    (21) loc -> . ID
+
+    NOT             shift and go to state 41
+    MENOS           shift and go to state 39
+    LPAREN          shift and go to state 43
+    NUMERO          shift and go to state 44
+    REAL            shift and go to state 45
+    TRUE            shift and go to state 46
+    FALSE           shift and go to state 47
+    ID              shift and go to state 21
+
+    expr                           shift and go to state 77
+    term                           shift and go to state 38
+    unario                         shift and go to state 40
+    factor                         shift and go to state 42
+    loc                            shift and go to state 32
+
+state 59
+
+    (30) rel -> expr LE . expr
+    (34) expr -> . expr MAS term
+    (35) expr -> . expr MENOS term
+    (36) expr -> . term
+    (37) term -> . term MULTIPLICACION unario
+    (38) term -> . term DIVISION unario
+    (39) term -> . unario
+    (40) unario -> . NOT unario
+    (41) unario -> . MENOS unario
+    (42) unario -> . factor
+    (43) factor -> . LPAREN bool RPAREN
+    (44) factor -> . loc
+    (45) factor -> . NUMERO
+    (46) factor -> . REAL
+    (47) factor -> . TRUE
+    (48) factor -> . FALSE
+    (20) loc -> . loc LCORCHETE bool RCORCHETE
+    (21) loc -> . ID
+
+    NOT             shift and go to state 41
+    MENOS           shift and go to state 39
+    LPAREN          shift and go to state 43
+    NUMERO          shift and go to state 44
+    REAL            shift and go to state 45
+    TRUE            shift and go to state 46
+    FALSE           shift and go to state 47
+    ID              shift and go to state 21
+
+    expr                           shift and go to state 78
+    term                           shift and go to state 38
+    unario                         shift and go to state 40
+    factor                         shift and go to state 42
+    loc                            shift and go to state 32
+
+state 60
+
+    (31) rel -> expr GE . expr
+    (34) expr -> . expr MAS term
+    (35) expr -> . expr MENOS term
+    (36) expr -> . term
+    (37) term -> . term MULTIPLICACION unario
+    (38) term -> . term DIVISION unario
+    (39) term -> . unario
+    (40) unario -> . NOT unario
+    (41) unario -> . MENOS unario
+    (42) unario -> . factor
+    (43) factor -> . LPAREN bool RPAREN
+    (44) factor -> . loc
+    (45) factor -> . NUMERO
+    (46) factor -> . REAL
+    (47) factor -> . TRUE
+    (48) factor -> . FALSE
+    (20) loc -> . loc LCORCHETE bool RCORCHETE
+    (21) loc -> . ID
+
+    NOT             shift and go to state 41
+    MENOS           shift and go to state 39
+    LPAREN          shift and go to state 43
+    NUMERO          shift and go to state 44
+    REAL            shift and go to state 45
+    TRUE            shift and go to state 46
+    FALSE           shift and go to state 47
+    ID              shift and go to state 21
+
+    expr                           shift and go to state 79
+    term                           shift and go to state 38
+    unario                         shift and go to state 40
+    factor                         shift and go to state 42
+    loc                            shift and go to state 32
+
+state 61
+
+    (32) rel -> expr GT . expr
+    (34) expr -> . expr MAS term
+    (35) expr -> . expr MENOS term
+    (36) expr -> . term
+    (37) term -> . term MULTIPLICACION unario
+    (38) term -> . term DIVISION unario
+    (39) term -> . unario
+    (40) unario -> . NOT unario
+    (41) unario -> . MENOS unario
+    (42) unario -> . factor
+    (43) factor -> . LPAREN bool RPAREN
+    (44) factor -> . loc
+    (45) factor -> . NUMERO
+    (46) factor -> . REAL
+    (47) factor -> . TRUE
+    (48) factor -> . FALSE
+    (20) loc -> . loc LCORCHETE bool RCORCHETE
+    (21) loc -> . ID
+
+    NOT             shift and go to state 41
+    MENOS           shift and go to state 39
+    LPAREN          shift and go to state 43
+    NUMERO          shift and go to state 44
+    REAL            shift and go to state 45
+    TRUE            shift and go to state 46
+    FALSE           shift and go to state 47
+    ID              shift and go to state 21
+
+    expr                           shift and go to state 80
+    term                           shift and go to state 38
+    unario                         shift and go to state 40
+    factor                         shift and go to state 42
+    loc                            shift and go to state 32
+
+state 62
+
+    (34) expr -> expr MAS . term
+    (37) term -> . term MULTIPLICACION unario
+    (38) term -> . term DIVISION unario
+    (39) term -> . unario
+    (40) unario -> . NOT unario
+    (41) unario -> . MENOS unario
+    (42) unario -> . factor
+    (43) factor -> . LPAREN bool RPAREN
+    (44) factor -> . loc
+    (45) factor -> . NUMERO
+    (46) factor -> . REAL
+    (47) factor -> . TRUE
+    (48) factor -> . FALSE
+    (20) loc -> . loc LCORCHETE bool RCORCHETE
+    (21) loc -> . ID
+
+    NOT             shift and go to state 41
+    MENOS           shift and go to state 39
+    LPAREN          shift and go to state 43
+    NUMERO          shift and go to state 44
+    REAL            shift and go to state 45
+    TRUE            shift and go to state 46
+    FALSE           shift and go to state 47
+    ID              shift and go to state 21
+
+    term                           shift and go to state 81
+    unario                         shift and go to state 40
+    factor                         shift and go to state 42
+    loc                            shift and go to state 32
+
+state 63
+
+    (35) expr -> expr MENOS . term
+    (37) term -> . term MULTIPLICACION unario
+    (38) term -> . term DIVISION unario
+    (39) term -> . unario
+    (40) unario -> . NOT unario
+    (41) unario -> . MENOS unario
+    (42) unario -> . factor
+    (43) factor -> . LPAREN bool RPAREN
+    (44) factor -> . loc
+    (45) factor -> . NUMERO
+    (46) factor -> . REAL
+    (47) factor -> . TRUE
+    (48) factor -> . FALSE
+    (20) loc -> . loc LCORCHETE bool RCORCHETE
+    (21) loc -> . ID
+
+    NOT             shift and go to state 41
+    MENOS           shift and go to state 39
+    LPAREN          shift and go to state 43
+    NUMERO          shift and go to state 44
+    REAL            shift and go to state 45
+    TRUE            shift and go to state 46
+    FALSE           shift and go to state 47
+    ID              shift and go to state 21
+
+    term                           shift and go to state 82
+    unario                         shift and go to state 40
+    factor                         shift and go to state 42
+    loc                            shift and go to state 32
+
+state 64
+
+    (37) term -> term MULTIPLICACION . unario
+    (40) unario -> . NOT unario
+    (41) unario -> . MENOS unario
+    (42) unario -> . factor
+    (43) factor -> . LPAREN bool RPAREN
+    (44) factor -> . loc
+    (45) factor -> . NUMERO
+    (46) factor -> . REAL
+    (47) factor -> . TRUE
+    (48) factor -> . FALSE
+    (20) loc -> . loc LCORCHETE bool RCORCHETE
+    (21) loc -> . ID
+
+    NOT             shift and go to state 41
+    MENOS           shift and go to state 39
+    LPAREN          shift and go to state 43
+    NUMERO          shift and go to state 44
+    REAL            shift and go to state 45
+    TRUE            shift and go to state 46
+    FALSE           shift and go to state 47
+    ID              shift and go to state 21
+
+    unario                         shift and go to state 83
+    factor                         shift and go to state 42
+    loc                            shift and go to state 32
+
+state 65
+
+    (38) term -> term DIVISION . unario
+    (40) unario -> . NOT unario
+    (41) unario -> . MENOS unario
+    (42) unario -> . factor
+    (43) factor -> . LPAREN bool RPAREN
+    (44) factor -> . loc
+    (45) factor -> . NUMERO
+    (46) factor -> . REAL
+    (47) factor -> . TRUE
+    (48) factor -> . FALSE
+    (20) loc -> . loc LCORCHETE bool RCORCHETE
+    (21) loc -> . ID
+
+    NOT             shift and go to state 41
+    MENOS           shift and go to state 39
+    LPAREN          shift and go to state 43
+    NUMERO          shift and go to state 44
+    REAL            shift and go to state 45
+    TRUE            shift and go to state 46
+    FALSE           shift and go to state 47
+    ID              shift and go to state 21
+
+    unario                         shift and go to state 84
+    factor                         shift and go to state 42
+    loc                            shift and go to state 32
+
+state 66
+
+    (41) unario -> MENOS unario .
+
+    MULTIPLICACION  reduce using rule 41 (unario -> MENOS unario .)
+    DIVISION        reduce using rule 41 (unario -> MENOS unario .)
+    LT              reduce using rule 41 (unario -> MENOS unario .)
+    LE              reduce using rule 41 (unario -> MENOS unario .)
+    GE              reduce using rule 41 (unario -> MENOS unario .)
+    GT              reduce using rule 41 (unario -> MENOS unario .)
+    MAS             reduce using rule 41 (unario -> MENOS unario .)
+    MENOS           reduce using rule 41 (unario -> MENOS unario .)
+    IGUALES         reduce using rule 41 (unario -> MENOS unario .)
+    NE              reduce using rule 41 (unario -> MENOS unario .)
+    AND             reduce using rule 41 (unario -> MENOS unario .)
+    PUNTOYCOMA      reduce using rule 41 (unario -> MENOS unario .)
+    OR              reduce using rule 41 (unario -> MENOS unario .)
+    RCORCHETE       reduce using rule 41 (unario -> MENOS unario .)
+    RPAREN          reduce using rule 41 (unario -> MENOS unario .)
+
+
+state 67
+
+    (40) unario -> NOT unario .
+
+    MULTIPLICACION  reduce using rule 40 (unario -> NOT unario .)
+    DIVISION        reduce using rule 40 (unario -> NOT unario .)
+    LT              reduce using rule 40 (unario -> NOT unario .)
+    LE              reduce using rule 40 (unario -> NOT unario .)
+    GE              reduce using rule 40 (unario -> NOT unario .)
+    GT              reduce using rule 40 (unario -> NOT unario .)
+    MAS             reduce using rule 40 (unario -> NOT unario .)
+    MENOS           reduce using rule 40 (unario -> NOT unario .)
+    IGUALES         reduce using rule 40 (unario -> NOT unario .)
+    NE              reduce using rule 40 (unario -> NOT unario .)
+    AND             reduce using rule 40 (unario -> NOT unario .)
+    PUNTOYCOMA      reduce using rule 40 (unario -> NOT unario .)
+    OR              reduce using rule 40 (unario -> NOT unario .)
+    RCORCHETE       reduce using rule 40 (unario -> NOT unario .)
+    RPAREN          reduce using rule 40 (unario -> NOT unario .)
+
+
+state 68
+
+    (43) factor -> LPAREN bool . RPAREN
+    (22) bool -> bool . OR comb
+
+    RPAREN          shift and go to state 85
+    OR              shift and go to state 54
+
+
+state 69
+
+    (20) loc -> loc LCORCHETE bool RCORCHETE .
+
+    IGUAL           reduce using rule 20 (loc -> loc LCORCHETE bool RCORCHETE .)
+    LCORCHETE       reduce using rule 20 (loc -> loc LCORCHETE bool RCORCHETE .)
+    MULTIPLICACION  reduce using rule 20 (loc -> loc LCORCHETE bool RCORCHETE .)
+    DIVISION        reduce using rule 20 (loc -> loc LCORCHETE bool RCORCHETE .)
+    LT              reduce using rule 20 (loc -> loc LCORCHETE bool RCORCHETE .)
+    LE              reduce using rule 20 (loc -> loc LCORCHETE bool RCORCHETE .)
+    GE              reduce using rule 20 (loc -> loc LCORCHETE bool RCORCHETE .)
+    GT              reduce using rule 20 (loc -> loc LCORCHETE bool RCORCHETE .)
+    MAS             reduce using rule 20 (loc -> loc LCORCHETE bool RCORCHETE .)
+    MENOS           reduce using rule 20 (loc -> loc LCORCHETE bool RCORCHETE .)
+    IGUALES         reduce using rule 20 (loc -> loc LCORCHETE bool RCORCHETE .)
+    NE              reduce using rule 20 (loc -> loc LCORCHETE bool RCORCHETE .)
+    AND             reduce using rule 20 (loc -> loc LCORCHETE bool RCORCHETE .)
+    PUNTOYCOMA      reduce using rule 20 (loc -> loc LCORCHETE bool RCORCHETE .)
+    OR              reduce using rule 20 (loc -> loc LCORCHETE bool RCORCHETE .)
+    RCORCHETE       reduce using rule 20 (loc -> loc LCORCHETE bool RCORCHETE .)
+    RPAREN          reduce using rule 20 (loc -> loc LCORCHETE bool RCORCHETE .)
+
+
+state 70
+
+    (14) instr -> IF LPAREN bool RPAREN . instr
+    (15) instr -> IF LPAREN bool RPAREN . instr ELSE instr
+    (13) instr -> . loc IGUAL bool PUNTOYCOMA
+    (14) instr -> . IF LPAREN bool RPAREN instr
+    (15) instr -> . IF LPAREN bool RPAREN instr ELSE instr
+    (16) instr -> . WHILE LPAREN bool RPAREN instr
+    (17) instr -> . DO instr WHILE LPAREN bool RPAREN PUNTOYCOMA
+    (18) instr -> . BREAK PUNTOYCOMA
+    (19) instr -> . bloque
+    (20) loc -> . loc LCORCHETE bool RCORCHETE
+    (21) loc -> . ID
+    (2) bloque -> . LLLAVE decls instrs RLLAVE
+
+    IF              shift and go to state 16
+    WHILE           shift and go to state 17
+    DO              shift and go to state 18
+    BREAK           shift and go to state 19
+    ID              shift and go to state 21
+    LLLAVE          shift and go to state 3
+
+    instr                          shift and go to state 86
+    loc                            shift and go to state 15
+    bloque                         shift and go to state 20
+
+state 71
+
+    (16) instr -> WHILE LPAREN bool RPAREN . instr
+    (13) instr -> . loc IGUAL bool PUNTOYCOMA
+    (14) instr -> . IF LPAREN bool RPAREN instr
+    (15) instr -> . IF LPAREN bool RPAREN instr ELSE instr
+    (16) instr -> . WHILE LPAREN bool RPAREN instr
+    (17) instr -> . DO instr WHILE LPAREN bool RPAREN PUNTOYCOMA
+    (18) instr -> . BREAK PUNTOYCOMA
+    (19) instr -> . bloque
+    (20) loc -> . loc LCORCHETE bool RCORCHETE
+    (21) loc -> . ID
+    (2) bloque -> . LLLAVE decls instrs RLLAVE
+
+    IF              shift and go to state 16
+    WHILE           shift and go to state 17
+    DO              shift and go to state 18
+    BREAK           shift and go to state 19
+    ID              shift and go to state 21
+    LLLAVE          shift and go to state 3
+
+    instr                          shift and go to state 87
+    loc                            shift and go to state 15
+    bloque                         shift and go to state 20
+
+state 72
+
+    (17) instr -> DO instr WHILE LPAREN . bool RPAREN PUNTOYCOMA
+    (22) bool -> . bool OR comb
+    (23) bool -> . comb
+    (24) comb -> . comb AND igualdad
+    (25) comb -> . igualdad
+    (26) igualdad -> . igualdad IGUALES rel
+    (27) igualdad -> . igualdad NE rel
+    (28) igualdad -> . rel
+    (29) rel -> . expr LT expr
+    (30) rel -> . expr LE expr
+    (31) rel -> . expr GE expr
+    (32) rel -> . expr GT expr
+    (33) rel -> . expr
+    (34) expr -> . expr MAS term
+    (35) expr -> . expr MENOS term
+    (36) expr -> . term
+    (37) term -> . term MULTIPLICACION unario
+    (38) term -> . term DIVISION unario
+    (39) term -> . unario
+    (40) unario -> . NOT unario
+    (41) unario -> . MENOS unario
+    (42) unario -> . factor
+    (43) factor -> . LPAREN bool RPAREN
+    (44) factor -> . loc
+    (45) factor -> . NUMERO
+    (46) factor -> . REAL
+    (47) factor -> . TRUE
+    (48) factor -> . FALSE
+    (20) loc -> . loc LCORCHETE bool RCORCHETE
+    (21) loc -> . ID
+
+    NOT             shift and go to state 41
+    MENOS           shift and go to state 39
+    LPAREN          shift and go to state 43
+    NUMERO          shift and go to state 44
+    REAL            shift and go to state 45
+    TRUE            shift and go to state 46
+    FALSE           shift and go to state 47
+    ID              shift and go to state 21
+
+    bool                           shift and go to state 88
+    comb                           shift and go to state 34
+    igualdad                       shift and go to state 35
+    rel                            shift and go to state 36
+    expr                           shift and go to state 37
+    term                           shift and go to state 38
+    unario                         shift and go to state 40
+    factor                         shift and go to state 42
+    loc                            shift and go to state 32
+
+state 73
+
+    (22) bool -> bool OR comb .
+    (24) comb -> comb . AND igualdad
+
+    PUNTOYCOMA      reduce using rule 22 (bool -> bool OR comb .)
+    OR              reduce using rule 22 (bool -> bool OR comb .)
+    RCORCHETE       reduce using rule 22 (bool -> bool OR comb .)
+    RPAREN          reduce using rule 22 (bool -> bool OR comb .)
+    AND             shift and go to state 55
+
+
+state 74
+
+    (24) comb -> comb AND igualdad .
+    (26) igualdad -> igualdad . IGUALES rel
+    (27) igualdad -> igualdad . NE rel
+
+    AND             reduce using rule 24 (comb -> comb AND igualdad .)
+    PUNTOYCOMA      reduce using rule 24 (comb -> comb AND igualdad .)
+    OR              reduce using rule 24 (comb -> comb AND igualdad .)
+    RCORCHETE       reduce using rule 24 (comb -> comb AND igualdad .)
+    RPAREN          reduce using rule 24 (comb -> comb AND igualdad .)
+    IGUALES         shift and go to state 56
+    NE              shift and go to state 57
+
+
+state 75
+
+    (26) igualdad -> igualdad IGUALES rel .
+
+    IGUALES         reduce using rule 26 (igualdad -> igualdad IGUALES rel .)
+    NE              reduce using rule 26 (igualdad -> igualdad IGUALES rel .)
+    AND             reduce using rule 26 (igualdad -> igualdad IGUALES rel .)
+    PUNTOYCOMA      reduce using rule 26 (igualdad -> igualdad IGUALES rel .)
+    OR              reduce using rule 26 (igualdad -> igualdad IGUALES rel .)
+    RCORCHETE       reduce using rule 26 (igualdad -> igualdad IGUALES rel .)
+    RPAREN          reduce using rule 26 (igualdad -> igualdad IGUALES rel .)
+
+
+state 76
+
+    (27) igualdad -> igualdad NE rel .
+
+    IGUALES         reduce using rule 27 (igualdad -> igualdad NE rel .)
+    NE              reduce using rule 27 (igualdad -> igualdad NE rel .)
+    AND             reduce using rule 27 (igualdad -> igualdad NE rel .)
+    PUNTOYCOMA      reduce using rule 27 (igualdad -> igualdad NE rel .)
+    OR              reduce using rule 27 (igualdad -> igualdad NE rel .)
+    RCORCHETE       reduce using rule 27 (igualdad -> igualdad NE rel .)
+    RPAREN          reduce using rule 27 (igualdad -> igualdad NE rel .)
+
+
+state 77
+
+    (29) rel -> expr LT expr .
+    (34) expr -> expr . MAS term
+    (35) expr -> expr . MENOS term
+
+    IGUALES         reduce using rule 29 (rel -> expr LT expr .)
+    NE              reduce using rule 29 (rel -> expr LT expr .)
+    AND             reduce using rule 29 (rel -> expr LT expr .)
+    PUNTOYCOMA      reduce using rule 29 (rel -> expr LT expr .)
+    OR              reduce using rule 29 (rel -> expr LT expr .)
+    RCORCHETE       reduce using rule 29 (rel -> expr LT expr .)
+    RPAREN          reduce using rule 29 (rel -> expr LT expr .)
+    MAS             shift and go to state 62
+    MENOS           shift and go to state 63
+
+
+state 78
+
+    (30) rel -> expr LE expr .
+    (34) expr -> expr . MAS term
+    (35) expr -> expr . MENOS term
+
+    IGUALES         reduce using rule 30 (rel -> expr LE expr .)
+    NE              reduce using rule 30 (rel -> expr LE expr .)
+    AND             reduce using rule 30 (rel -> expr LE expr .)
+    PUNTOYCOMA      reduce using rule 30 (rel -> expr LE expr .)
+    OR              reduce using rule 30 (rel -> expr LE expr .)
+    RCORCHETE       reduce using rule 30 (rel -> expr LE expr .)
+    RPAREN          reduce using rule 30 (rel -> expr LE expr .)
+    MAS             shift and go to state 62
+    MENOS           shift and go to state 63
+
+
+state 79
+
+    (31) rel -> expr GE expr .
+    (34) expr -> expr . MAS term
+    (35) expr -> expr . MENOS term
+
+    IGUALES         reduce using rule 31 (rel -> expr GE expr .)
+    NE              reduce using rule 31 (rel -> expr GE expr .)
+    AND             reduce using rule 31 (rel -> expr GE expr .)
+    PUNTOYCOMA      reduce using rule 31 (rel -> expr GE expr .)
+    OR              reduce using rule 31 (rel -> expr GE expr .)
+    RCORCHETE       reduce using rule 31 (rel -> expr GE expr .)
+    RPAREN          reduce using rule 31 (rel -> expr GE expr .)
+    MAS             shift and go to state 62
+    MENOS           shift and go to state 63
+
+
+state 80
+
+    (32) rel -> expr GT expr .
+    (34) expr -> expr . MAS term
+    (35) expr -> expr . MENOS term
+
+    IGUALES         reduce using rule 32 (rel -> expr GT expr .)
+    NE              reduce using rule 32 (rel -> expr GT expr .)
+    AND             reduce using rule 32 (rel -> expr GT expr .)
+    PUNTOYCOMA      reduce using rule 32 (rel -> expr GT expr .)
+    OR              reduce using rule 32 (rel -> expr GT expr .)
+    RCORCHETE       reduce using rule 32 (rel -> expr GT expr .)
+    RPAREN          reduce using rule 32 (rel -> expr GT expr .)
+    MAS             shift and go to state 62
+    MENOS           shift and go to state 63
+
+
+state 81
+
+    (34) expr -> expr MAS term .
+    (37) term -> term . MULTIPLICACION unario
+    (38) term -> term . DIVISION unario
+
+    LT              reduce using rule 34 (expr -> expr MAS term .)
+    LE              reduce using rule 34 (expr -> expr MAS term .)
+    GE              reduce using rule 34 (expr -> expr MAS term .)
+    GT              reduce using rule 34 (expr -> expr MAS term .)
+    MAS             reduce using rule 34 (expr -> expr MAS term .)
+    MENOS           reduce using rule 34 (expr -> expr MAS term .)
+    IGUALES         reduce using rule 34 (expr -> expr MAS term .)
+    NE              reduce using rule 34 (expr -> expr MAS term .)
+    AND             reduce using rule 34 (expr -> expr MAS term .)
+    PUNTOYCOMA      reduce using rule 34 (expr -> expr MAS term .)
+    OR              reduce using rule 34 (expr -> expr MAS term .)
+    RCORCHETE       reduce using rule 34 (expr -> expr MAS term .)
+    RPAREN          reduce using rule 34 (expr -> expr MAS term .)
+    MULTIPLICACION  shift and go to state 64
+    DIVISION        shift and go to state 65
+
+
+state 82
+
+    (35) expr -> expr MENOS term .
+    (37) term -> term . MULTIPLICACION unario
+    (38) term -> term . DIVISION unario
+
+    LT              reduce using rule 35 (expr -> expr MENOS term .)
+    LE              reduce using rule 35 (expr -> expr MENOS term .)
+    GE              reduce using rule 35 (expr -> expr MENOS term .)
+    GT              reduce using rule 35 (expr -> expr MENOS term .)
+    MAS             reduce using rule 35 (expr -> expr MENOS term .)
+    MENOS           reduce using rule 35 (expr -> expr MENOS term .)
+    IGUALES         reduce using rule 35 (expr -> expr MENOS term .)
+    NE              reduce using rule 35 (expr -> expr MENOS term .)
+    AND             reduce using rule 35 (expr -> expr MENOS term .)
+    PUNTOYCOMA      reduce using rule 35 (expr -> expr MENOS term .)
+    OR              reduce using rule 35 (expr -> expr MENOS term .)
+    RCORCHETE       reduce using rule 35 (expr -> expr MENOS term .)
+    RPAREN          reduce using rule 35 (expr -> expr MENOS term .)
+    MULTIPLICACION  shift and go to state 64
+    DIVISION        shift and go to state 65
+
+
+state 83
+
+    (37) term -> term MULTIPLICACION unario .
+
+    MULTIPLICACION  reduce using rule 37 (term -> term MULTIPLICACION unario .)
+    DIVISION        reduce using rule 37 (term -> term MULTIPLICACION unario .)
+    LT              reduce using rule 37 (term -> term MULTIPLICACION unario .)
+    LE              reduce using rule 37 (term -> term MULTIPLICACION unario .)
+    GE              reduce using rule 37 (term -> term MULTIPLICACION unario .)
+    GT              reduce using rule 37 (term -> term MULTIPLICACION unario .)
+    MAS             reduce using rule 37 (term -> term MULTIPLICACION unario .)
+    MENOS           reduce using rule 37 (term -> term MULTIPLICACION unario .)
+    IGUALES         reduce using rule 37 (term -> term MULTIPLICACION unario .)
+    NE              reduce using rule 37 (term -> term MULTIPLICACION unario .)
+    AND             reduce using rule 37 (term -> term MULTIPLICACION unario .)
+    PUNTOYCOMA      reduce using rule 37 (term -> term MULTIPLICACION unario .)
+    OR              reduce using rule 37 (term -> term MULTIPLICACION unario .)
+    RCORCHETE       reduce using rule 37 (term -> term MULTIPLICACION unario .)
+    RPAREN          reduce using rule 37 (term -> term MULTIPLICACION unario .)
+
+
+state 84
+
+    (38) term -> term DIVISION unario .
+
+    MULTIPLICACION  reduce using rule 38 (term -> term DIVISION unario .)
+    DIVISION        reduce using rule 38 (term -> term DIVISION unario .)
+    LT              reduce using rule 38 (term -> term DIVISION unario .)
+    LE              reduce using rule 38 (term -> term DIVISION unario .)
+    GE              reduce using rule 38 (term -> term DIVISION unario .)
+    GT              reduce using rule 38 (term -> term DIVISION unario .)
+    MAS             reduce using rule 38 (term -> term DIVISION unario .)
+    MENOS           reduce using rule 38 (term -> term DIVISION unario .)
+    IGUALES         reduce using rule 38 (term -> term DIVISION unario .)
+    NE              reduce using rule 38 (term -> term DIVISION unario .)
+    AND             reduce using rule 38 (term -> term DIVISION unario .)
+    PUNTOYCOMA      reduce using rule 38 (term -> term DIVISION unario .)
+    OR              reduce using rule 38 (term -> term DIVISION unario .)
+    RCORCHETE       reduce using rule 38 (term -> term DIVISION unario .)
+    RPAREN          reduce using rule 38 (term -> term DIVISION unario .)
+
+
+state 85
+
+    (43) factor -> LPAREN bool RPAREN .
+
+    MULTIPLICACION  reduce using rule 43 (factor -> LPAREN bool RPAREN .)
+    DIVISION        reduce using rule 43 (factor -> LPAREN bool RPAREN .)
+    LT              reduce using rule 43 (factor -> LPAREN bool RPAREN .)
+    LE              reduce using rule 43 (factor -> LPAREN bool RPAREN .)
+    GE              reduce using rule 43 (factor -> LPAREN bool RPAREN .)
+    GT              reduce using rule 43 (factor -> LPAREN bool RPAREN .)
+    MAS             reduce using rule 43 (factor -> LPAREN bool RPAREN .)
+    MENOS           reduce using rule 43 (factor -> LPAREN bool RPAREN .)
+    IGUALES         reduce using rule 43 (factor -> LPAREN bool RPAREN .)
+    NE              reduce using rule 43 (factor -> LPAREN bool RPAREN .)
+    AND             reduce using rule 43 (factor -> LPAREN bool RPAREN .)
+    PUNTOYCOMA      reduce using rule 43 (factor -> LPAREN bool RPAREN .)
+    OR              reduce using rule 43 (factor -> LPAREN bool RPAREN .)
+    RCORCHETE       reduce using rule 43 (factor -> LPAREN bool RPAREN .)
+    RPAREN          reduce using rule 43 (factor -> LPAREN bool RPAREN .)
+
+
+state 86
+
+    (14) instr -> IF LPAREN bool RPAREN instr .
+    (15) instr -> IF LPAREN bool RPAREN instr . ELSE instr
+
+  ! shift/reduce conflict for ELSE resolved as shift
+    RLLAVE          reduce using rule 14 (instr -> IF LPAREN bool RPAREN instr .)
+    IF              reduce using rule 14 (instr -> IF LPAREN bool RPAREN instr .)
+    WHILE           reduce using rule 14 (instr -> IF LPAREN bool RPAREN instr .)
+    DO              reduce using rule 14 (instr -> IF LPAREN bool RPAREN instr .)
+    BREAK           reduce using rule 14 (instr -> IF LPAREN bool RPAREN instr .)
+    ID              reduce using rule 14 (instr -> IF LPAREN bool RPAREN instr .)
+    LLLAVE          reduce using rule 14 (instr -> IF LPAREN bool RPAREN instr .)
+    ELSE            shift and go to state 89
+
+  ! ELSE            [ reduce using rule 14 (instr -> IF LPAREN bool RPAREN instr .) ]
+
+
+state 87
+
+    (16) instr -> WHILE LPAREN bool RPAREN instr .
+
+    RLLAVE          reduce using rule 16 (instr -> WHILE LPAREN bool RPAREN instr .)
+    IF              reduce using rule 16 (instr -> WHILE LPAREN bool RPAREN instr .)
+    WHILE           reduce using rule 16 (instr -> WHILE LPAREN bool RPAREN instr .)
+    DO              reduce using rule 16 (instr -> WHILE LPAREN bool RPAREN instr .)
+    BREAK           reduce using rule 16 (instr -> WHILE LPAREN bool RPAREN instr .)
+    ID              reduce using rule 16 (instr -> WHILE LPAREN bool RPAREN instr .)
+    LLLAVE          reduce using rule 16 (instr -> WHILE LPAREN bool RPAREN instr .)
+    ELSE            reduce using rule 16 (instr -> WHILE LPAREN bool RPAREN instr .)
+
+
+state 88
+
+    (17) instr -> DO instr WHILE LPAREN bool . RPAREN PUNTOYCOMA
+    (22) bool -> bool . OR comb
+
+    RPAREN          shift and go to state 90
+    OR              shift and go to state 54
+
+
+state 89
+
+    (15) instr -> IF LPAREN bool RPAREN instr ELSE . instr
+    (13) instr -> . loc IGUAL bool PUNTOYCOMA
+    (14) instr -> . IF LPAREN bool RPAREN instr
+    (15) instr -> . IF LPAREN bool RPAREN instr ELSE instr
+    (16) instr -> . WHILE LPAREN bool RPAREN instr
+    (17) instr -> . DO instr WHILE LPAREN bool RPAREN PUNTOYCOMA
+    (18) instr -> . BREAK PUNTOYCOMA
+    (19) instr -> . bloque
+    (20) loc -> . loc LCORCHETE bool RCORCHETE
+    (21) loc -> . ID
+    (2) bloque -> . LLLAVE decls instrs RLLAVE
+
+    IF              shift and go to state 16
+    WHILE           shift and go to state 17
+    DO              shift and go to state 18
+    BREAK           shift and go to state 19
+    ID              shift and go to state 21
+    LLLAVE          shift and go to state 3
+
+    instr                          shift and go to state 91
+    loc                            shift and go to state 15
+    bloque                         shift and go to state 20
+
+state 90
+
+    (17) instr -> DO instr WHILE LPAREN bool RPAREN . PUNTOYCOMA
+
+    PUNTOYCOMA      shift and go to state 92
+
+
+state 91
+
+    (15) instr -> IF LPAREN bool RPAREN instr ELSE instr .
+
+    RLLAVE          reduce using rule 15 (instr -> IF LPAREN bool RPAREN instr ELSE instr .)
+    IF              reduce using rule 15 (instr -> IF LPAREN bool RPAREN instr ELSE instr .)
+    WHILE           reduce using rule 15 (instr -> IF LPAREN bool RPAREN instr ELSE instr .)
+    DO              reduce using rule 15 (instr -> IF LPAREN bool RPAREN instr ELSE instr .)
+    BREAK           reduce using rule 15 (instr -> IF LPAREN bool RPAREN instr ELSE instr .)
+    ID              reduce using rule 15 (instr -> IF LPAREN bool RPAREN instr ELSE instr .)
+    LLLAVE          reduce using rule 15 (instr -> IF LPAREN bool RPAREN instr ELSE instr .)
+    ELSE            reduce using rule 15 (instr -> IF LPAREN bool RPAREN instr ELSE instr .)
+
+
+state 92
+
+    (17) instr -> DO instr WHILE LPAREN bool RPAREN PUNTOYCOMA .
+
+    RLLAVE          reduce using rule 17 (instr -> DO instr WHILE LPAREN bool RPAREN PUNTOYCOMA .)
+    IF              reduce using rule 17 (instr -> DO instr WHILE LPAREN bool RPAREN PUNTOYCOMA .)
+    WHILE           reduce using rule 17 (instr -> DO instr WHILE LPAREN bool RPAREN PUNTOYCOMA .)
+    DO              reduce using rule 17 (instr -> DO instr WHILE LPAREN bool RPAREN PUNTOYCOMA .)
+    BREAK           reduce using rule 17 (instr -> DO instr WHILE LPAREN bool RPAREN PUNTOYCOMA .)
+    ID              reduce using rule 17 (instr -> DO instr WHILE LPAREN bool RPAREN PUNTOYCOMA .)
+    LLLAVE          reduce using rule 17 (instr -> DO instr WHILE LPAREN bool RPAREN PUNTOYCOMA .)
+    ELSE            reduce using rule 17 (instr -> DO instr WHILE LPAREN bool RPAREN PUNTOYCOMA .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for ELSE in state 86 resolved as shift
